@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset=gb2312"utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title></title>
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <style>
+        .box{margin: 130px}
+    </style>
+</head>
+<body>
+<% include header.ejs%>
+<div class="box" >
+    <h1>注册系统</h1>
+    <form>
+    <h4>姓名</h4>
+    <input type="text" id="username" name="username" placeholder="请输入用户名">
+    <br>
+    <h4>密码</h4>
+    <input type="password" id="userpwd" name="userpwd" placeholder="密码至少6位">
+    <br>
+    <br>
+    <button type="button" class="btn btn-default btn-success" id="regist">注册</button>
+    </form>
+</div>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/bootstrap.js"></script>
+<script >
+    $("#regist").on("click",function(){
+        $.ajax({
+            url:"/doRegist",
+            type:"post",
+            data:{
+                "username":$("#username").val(),
+                "userpwd":$("#userpwd").val()
+            },
+            success:function(result){
+                if(result=="-1"){
+                    alert("用户名已存在")
+                }else if(result=="1"){
+                    alert("注册成功")
+                    window.location.href="/"
+                }else{
+                    alert("注册失败")
+                }
+            }
+        })
+    })
+</script>
+
+</body>
+</html>
